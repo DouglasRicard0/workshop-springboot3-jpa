@@ -1,11 +1,14 @@
 package com.educandoweb.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 // Serializable serve para que o obejto trafegue na rede e ser gravado em arquivos
@@ -23,6 +26,10 @@ public class User implements Serializable {
 	private String phone;
 	private String password;
 
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = new ArrayList<>();
+
+	
 	public User() {
 	}
 
@@ -75,6 +82,9 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	public List<Order> getOrders() {
+		return orders;
+	}
 	// equals, hash code deve ser escolhido um dos medos para diferenciar um objeto
 	// do outro aqui nesse caso foi usado o id
 	@Override
